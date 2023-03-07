@@ -1,0 +1,58 @@
+
+<!--student xuan zheng   studentID 1068369 -->
+
+
+
+{% extends "base.html" %}
+{% block content %}
+    <!-- borrowers is the variable passed in listing borrowers -->
+    <!-- books is the variable passed in listing available books -->
+    <!-- loandate is the variable passed in containing the current date -->
+    <!-- name for the borrower dropdown borrower should be  borrower -->
+    <!-- name for the book dropdown should be book-->
+    <!-- name for the hidden field with date should be loandate -->
+    <!-- URL for submission (action) of form should be loan/add -->
+
+    <h3>Add Loan</h3>
+    <p class="text-muted">Add a Loan</p>
+
+    <form action="/loan/add" method="post">
+        <div class="mb-3">
+            <label for="InputBorrower" class="form-label">Borrower</label>
+            <select class="form-select" aria-label="Select borrower" name="borrower">
+                <option selected>select a borrower</option>
+                {% for borrower in borrowers %}
+                    <option value="{{ borrower.0 }}">{{ borrower.1 }} {{ borrower.2 }}</option>
+                    {#                    <option value="533">Zhe Wang</option>#}
+                    {#                    <option value="659">Di Wang</option>#}
+                    {#                    <option value="7523">Simon Charles</option>#}
+                    {#                    <option value="65233">Charlie Venz</option>#}
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="InputBook" class="form-label">Book</label>
+            <select class="form-select" aria-label="Select book" name="book">
+                <option selected>select a book</option>
+                {% for book in books %}
+                    <option value="{{ book.0 }}">{{ book.4 }}</option>
+                    {#                    <option value="7">The Wind in the Willows</option>#}
+                    {#                    <option value="3">Harry Potter and the Order of the Phoenix</option>#}
+                    {#                    <option value="11">Harry Potter and the Order of the Phoenix</option>#}
+                    {#                    <option value="19">Harry Potter and the Order of the Phoenix</option>#}
+                    {#                    <option value="27">Harry Potter and the Order of the Phoenix</option>#}
+                    {#                    <option value="81">Harry Potter and the Order of the Phoenix</option>#}
+                    {#                    <option value="4">Python Crash Course</option>#}
+                    {#                    <option value="25">Python Crash Course</option>#}
+                    {#                    <option value="34">Python Crash Course</option>#}
+                    {#                    <option value="49">Python Crash Course</option>#}
+                    {#                    <option value="234">Python Crash Course</option>#}
+                    {#                    value值为bookcopyid#}
+                {% endfor %}
+            </select>
+        </div>
+        <input type="hidden" name="loandate" value="{{ loandate }}">
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+{% endblock %}

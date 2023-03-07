@@ -1,0 +1,53 @@
+!--student xuan zheng   studentID 1068369 -->
+{% extends "base.html" %}
+{% block content %}
+    <!-- code in here to display a list of loans -->
+    <!-- loanlist is the variable passed in containing list of loans -->
+    <h3>Loan List</h3>
+    <p class="text-muted">A list of Loans</p>
+
+    <table class="table table-hover">
+        <tr>
+            <th>First Name</th>
+            <th>Family Name</th>
+            <th>Book Title</th>
+            <th>Author</th>
+            <th>Category</th>
+            <th>Year of Publication</th>
+            <th>Format</th>
+            <th>LoanDate</th>
+            <th>Status</th>
+        </tr>
+        {% set borrowser_list = [] %}
+        {% for loan in loanlist | sort(attribute=1) %}
+            {% if loan.12 == "eBook" %}
+                <tr style="color:#388e3c;">
+                    {% elif loan.12 == "Audio Book" %}
+                <tr style="color:#fbc02d">
+                    {% else %}
+                <tr>
+            {% endif %}
+            {% if not loan.0 in borrowser_list %}
+                {% set __ = borrowser_list.append(loan.0) %}
+                <td>{{ loan.1 }}</td>
+                <td>{{ loan.2 }}</td>
+            {% else %}
+                <td></td>
+                <td></td>
+            {% endif %}
+
+            <td>{{ loan.8 }}</td>
+            <td>{{ loan.9 }}</td>
+            <td>{{ loan.10 }}</td>
+            <td>{{ loan.11 }}</td>
+            <td>{{ loan.12 }}</td>
+            <td>{{ loan.5 }}</td>
+            {% if loan.6 == 0 %}
+                <td>On Loan</td>
+            {% else %}
+                <td>Returned</td>
+            {% endif %}
+        {% endfor %}
+    </table>
+
+{% endblock %}
